@@ -33,7 +33,7 @@ namespace IQU.SDK
     /// <summary>
     /// URL to service (must end with /)
     /// </summary>
-    private const String URL = "https://tracker.iqugroup.com/v3/";
+	private const String URL = "https://tracker.iqugroup.com/v3/";
 
     #endregion
 
@@ -138,28 +138,6 @@ namespace IQU.SDK
     #region Private methods
 
     /// <summary>
-    /// Convert byte array to hexadecimal string (upper case coding).
-    /// 
-    /// Source: 
-    /// http://stackoverflow.com/questions/311165/how-do-you-convert-byte-array-to-hexadecimal-string-and-vice-versa
-    /// </summary>
-    /// <returns>The bytes as a hexadecimal string.</returns>
-    /// <param name="aBytes">The array of bytes to convert.</param>
-    internal string ByteToHex(byte[] aBytes)
-    {
-      char[] result = new char[aBytes.Length * 2];
-      int nibble;
-      for (int index = 0; index < aBytes.Length; index++)
-      {
-        nibble = aBytes[index] >> 4;
-        result[index * 2] = (char)(87 + nibble + (((nibble - 10) >> 31) & -39));
-        nibble = aBytes[index] & 0xF;
-        result[index * 2 + 1] = (char)(87 + nibble + (((nibble - 10) >> 31) & -39));
-      }
-      return new string(result);
-    }
-
-    /// <summary>
     /// Get string as array of byte.
     /// </summary>
     /// <returns>The bytes.</returns>
@@ -175,13 +153,21 @@ namespace IQU.SDK
     /// <returns>The HMAC256 hash as hexadecimal string.</returns>
     /// <param name="aSecret">API secret</param>
     /// <param name="aContent">the content of the message</param>
-    private string GenerateHMACSHA512(string aSecret, string aContent)
-    {
-      // create hmac hash and return its hexadecimal representation
-      HMACSHA512 hmac = new HMACSHA512(this.GetBytes(aSecret));
-      byte[] generatedHash = hmac.ComputeHash(this.GetBytes(aContent));
-      return this.ByteToHex(generatedHash);
-    }
+	private string GenerateHMACSHA512(string key, string message) {
+		Encoding encoding = Encoding.UTF8;
+		var keyByte = encoding.GetBytes (key);
+		var hmacsha512 = new HMACSHA512 (keyByte);
+		hmacsha512.ComputeHash (encoding.GetBytes (message));
+		return this.ByteToHex (hmacsha512.Hash);
+		
+	}
+	private string ByteToHex(byte[] buff) {
+		string sbinary = "";
+		for (int i = 0; i < buff.Length; i++) {
+			sbinary += buff [i].ToString ("x2"); /* hex format */
+		}
+		return sbinary;
+	}
 
     /// <summary>
     /// Sends a signed message to the server.
