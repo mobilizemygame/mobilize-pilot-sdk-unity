@@ -15,7 +15,7 @@ namespace IQU.SDK
     /// <summary>
     /// %SDK version.
     /// </summary>
-    public const string SdkVersion = "1.0.0";
+    public const string SdkVersion = "1.0.2";
   
     /// <summary>
     /// %SDK type. 
