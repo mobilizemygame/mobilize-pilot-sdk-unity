@@ -373,7 +373,7 @@ namespace IQU.SDK
       {
         return;
       }
-      Dictionary<string, object> trackEvent = this.CreateEvent(EventRevenue, true);
+      Dictionary<string, object> trackEvent = this.CreateEvent(EventRevenue);
       trackEvent.Add("amount", anAmount);
       trackEvent.Add("currency", aCurrency);
       if (aReward != null)
@@ -411,7 +411,7 @@ namespace IQU.SDK
       {
         return;
       }
-      Dictionary<string, object> trackEvent = this.CreateEvent(EventRevenue, true);
+      Dictionary<string, object> trackEvent = this.CreateEvent(EventRevenue);
       trackEvent.Add("amount", anAmount);
       trackEvent.Add("currency", aCurrency);
       trackEvent.Add("vc_amount", aVirtualCurrencyAmount);
@@ -449,7 +449,7 @@ namespace IQU.SDK
       {
         return;
       }
-      Dictionary<string, object> trackEvent = this.CreateEvent(EventItemPurchase, true);
+      Dictionary<string, object> trackEvent = this.CreateEvent(EventItemPurchase);
       trackEvent.Add("name", aName);
       this.AddEvent(trackEvent);
     }
@@ -468,7 +468,7 @@ namespace IQU.SDK
       {
         return;
       }
-      Dictionary<string, object> trackEvent = this.CreateEvent(EventItemPurchase, true);
+      Dictionary<string, object> trackEvent = this.CreateEvent(EventItemPurchase);
       trackEvent.Add("name", aName);
       trackEvent.Add("vc_amount", aVirtualCurrencyAmount);
       this.AddEvent(trackEvent);
@@ -487,7 +487,7 @@ namespace IQU.SDK
       {
         return;
       }
-      Dictionary<string, object> trackEvent = this.CreateEvent(EventTutorial, true);
+      Dictionary<string, object> trackEvent = this.CreateEvent(EventTutorial);
       trackEvent.Add("step", aStep);
       this.AddEvent(trackEvent);
     }
@@ -506,7 +506,7 @@ namespace IQU.SDK
       {
         return;
       }
-      Dictionary<string, object> trackEvent = this.CreateEvent(EventMilestone, true);
+      Dictionary<string, object> trackEvent = this.CreateEvent(EventMilestone);
       trackEvent.Add("name", aName);
       trackEvent.Add("value", aValue);
       this.AddEvent(trackEvent);
@@ -530,7 +530,7 @@ namespace IQU.SDK
       {
         return;
       }
-      Dictionary<string, object> trackEvent = this.CreateEvent(EventMarketing, false);
+      Dictionary<string, object> trackEvent = this.CreateEvent(EventMarketing);
       this.PutField(trackEvent, "partner", aPartner);
       this.PutField(trackEvent, "campaign", aPartner);
       this.PutField(trackEvent, "ad", aPartner);
@@ -553,7 +553,7 @@ namespace IQU.SDK
       {
         return;
       }
-      Dictionary<string, object> trackEvent = this.CreateEvent(EventUserAttribute, false);
+      Dictionary<string, object> trackEvent = this.CreateEvent(EventUserAttribute);
       trackEvent.Add("name", aName);
       trackEvent.Add("value", aValue);
       this.AddEvent(trackEvent);
@@ -572,7 +572,7 @@ namespace IQU.SDK
       {
         return;
       }
-      Dictionary<string, object> trackEvent = this.CreateEvent(EventCountry, false);
+      Dictionary<string, object> trackEvent = this.CreateEvent(EventCountry);
       trackEvent.Add("value", aCountry);
       this.AddEvent(trackEvent);
     }
@@ -1220,16 +1220,12 @@ namespace IQU.SDK
     /// </summary>
     /// <returns>JSONObject instance containing event</returns>
     /// <param name="anEventType">Type to use</param>
-    /// <param name="anAddTimestamp">When <c>true</c> add "timestamp" field.</param>
-    private Dictionary<string, object> CreateEvent(string anEventType, bool anAddTimestamp)
+    private Dictionary<string, object> CreateEvent(string anEventType)
     {
-      Dictionary<string, object> result = new Dictionary<string, object>();
-      result.Add("type", anEventType);
-      if (anAddTimestamp)
-      {
-        result.Add("timestamp", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-      }
-      return result;
+		Dictionary<string, object> result = new Dictionary<string, object>();
+		result.Add("type", anEventType);
+		result.Add("timestamp", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+		return result;
     }
 
     #endregion
@@ -1246,7 +1242,7 @@ namespace IQU.SDK
       long currentTime = this.GetMilliseconds();
       if (currentTime > this.m_heartbeatTime + HeartbeatInterval)
       {
-        Dictionary<string, object> trackEvent = this.CreateEvent(EventHeartbeat, true);
+        Dictionary<string, object> trackEvent = this.CreateEvent(EventHeartbeat);
         trackEvent.Add("is_payable", this.m_payable);
         aMessages.Add(new IQUMessage(this.m_ids, trackEvent));
         this.m_heartbeatTime = currentTime;
@@ -1258,7 +1254,7 @@ namespace IQU.SDK
     /// </summary>
     private void TrackPlatform()
     {
-      Dictionary<string, object> trackEvent = this.CreateEvent(EventPlatform, false);
+      Dictionary<string, object> trackEvent = this.CreateEvent(EventPlatform);
       trackEvent.Add("device_model", SystemInfo.deviceModel);
       trackEvent.Add("os_name", SystemInfo.operatingSystem);
       trackEvent.Add("screen_size_width", Screen.width);
