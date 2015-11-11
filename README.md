@@ -48,6 +48,7 @@ The IQU SDK offers the following informational properties:
 ## Testing
 
 The IQU SDK contains the following properties to help with testing the SDK:
+
 1. `IQUSDK.Instance.LogEnabled` property to turn logging on or off.
 2. `IQUSDK.Instance.Log` property which will be filled with messages from various methods.
 3. `IQUSDK.Instance.TestMode` property to test the SDK without any server interaction or to simulate an offline situation with the server not being available.
