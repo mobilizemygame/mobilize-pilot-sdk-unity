@@ -1222,10 +1222,10 @@ namespace IQU.SDK
     /// <param name="anEventType">Type to use</param>
     private Dictionary<string, object> CreateEvent(string anEventType)
     {
-		Dictionary<string, object> result = new Dictionary<string, object>();
-		result.Add("type", anEventType);
-		result.Add("timestamp", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-		return result;
+      Dictionary<string, object> result = new Dictionary<string, object>();
+      result.Add("type", anEventType);
+      result.Add("timestamp", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+      return result;
     }
 
     #endregion
