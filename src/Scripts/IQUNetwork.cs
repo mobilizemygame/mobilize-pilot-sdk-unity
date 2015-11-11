@@ -33,7 +33,7 @@ namespace IQU.SDK
     /// <summary>
     /// URL to service (must end with /)
     /// </summary>
-	private const String URL = "https://tracker.iqugroup.com/v3/";
+    private const String URL = "https://tracker.iqugroup.com/v3/";
 
     #endregion
 
@@ -153,21 +153,30 @@ namespace IQU.SDK
     /// <returns>The HMAC256 hash as hexadecimal string.</returns>
     /// <param name="aSecret">API secret</param>
     /// <param name="aContent">the content of the message</param>
-	private string GenerateHMACSHA512(string key, string message) {
-		Encoding encoding = Encoding.UTF8;
-		var keyByte = encoding.GetBytes (key);
-		var hmacsha512 = new HMACSHA512 (keyByte);
-		hmacsha512.ComputeHash (encoding.GetBytes (message));
-		return this.ByteToHex (hmacsha512.Hash);
-		
-	}
-	private string ByteToHex(byte[] buff) {
-		string sbinary = "";
-		for (int i = 0; i < buff.Length; i++) {
-			sbinary += buff [i].ToString ("x2"); /* hex format */
-		}
-		return sbinary;
-	}
+    private string GenerateHMACSHA512(string aSecret, string aContent)
+    {
+      Encoding encoding = Encoding.UTF8;
+      var keyByte = encoding.GetBytes (aSecret);
+      var hmacsha512 = new HMACSHA512 (keyByte);
+      hmacsha512.ComputeHash (encoding.GetBytes (aContent));
+      return this.ByteToHex (hmacsha512.Hash);
+    }
+	
+    /// <summary>
+    /// Convert byte array to hex string.
+    /// </summary>
+    /// <returns>Hex string (lowercase).</returns>
+    /// <param name="aBuff">Byte array to convert</param>
+    private string ByteToHex(byte[] aBuff) 
+    {
+      string sbinary = "";
+      for (int i = 0; i < aBuff.Length; i++) 
+      {
+        /* hex format */
+        sbinary += aBuff [i].ToString ("x2"); 
+      }
+      return sbinary;
+    }
 
     /// <summary>
     /// Sends a signed message to the server.
