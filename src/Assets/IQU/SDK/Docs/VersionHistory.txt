@@ -1,4 +1,8 @@
 IQU SDK Version History
 
+v1.0.4
+- updated hash function
+- fixed errors in the documentation
+
 v1.0.0
 - initial version
