@@ -6,6 +6,30 @@ Mobilize Pilot Unity SDK
 
 `IQUSDK` is a class that encapsulates the IQU SDK and offers various methods and properties to communicate with the IQU server.
 
+## Installation
+
+#### Install with package file
+
+1. Download the *IQU.SDK.unity.vX.X.X.unitypackage* file (located in the root of this repository).
+2. Open an existing project or start a new project.
+3. Either double click *IQU.SDK.unity.vX.X.X.unitypackage* or use _Assets > Import Package > Custom Package..._ to open the file.
+4. **Warning**: the package includes a version of the Google Play services for Android; if this is not required uncheck the *google-play-services_lib* folder in the */Plugins/Android/* folder before importing the files.
+
+#### Install with source
+
+1. Clone the repository or download the zip.
+2. Copy all files from the *src/Assets/* folder to the */Assets/* folder of the project.
+3. To add Google Play Service support, copy the *google-play-services_lib* folder from */{Android SDK root}/extras/google/google_play_services/libproject/* to */Assets/Plugins/Android/*
+
+#### Finish installation
+
+1. **Important(!)**: when using a stripping level other then disabled, copy (or move) the *link.xml* file from the */Assets/IQU/SDK/Docs/* to the */Assets/* (root) folder of your project. This will prevent the compiler from removing security related classes that are referenced indirectly.
+2. To remove support for the advertising id on iOS and any reference to the classes needed to obtain the advertising id, delete the following file: */Assets/Plugin/iOS/IQUSDKAdvertisingStub.m*
+
+The */Assets/IQU/SDK/Examples* folder contains an example scene file and c# script file.
+
+For help open the */Assets/IQU/SDK/Docs/reference.chm* file or unzip the */Assets/IQU/SDK/Docs/reference.html.zip* somewhere outside the project folders (the zip file also contains several support javascript files which generate errors/warnings from Unity3D when placed inside the project folder).
+
 ## Quick usage guide
 
 1. Methods and properties can be accessed trough the static `IQUSDK.Instance` property.
