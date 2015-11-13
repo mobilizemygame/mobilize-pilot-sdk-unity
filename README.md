@@ -60,7 +60,7 @@ For on Android devices, the SDK requires Google Play libraries to obtain these v
 
 On iOS the SDK also checks for the required classes and uses reflection to obtain the values so there are no errors when running the application on iOS versions that don't support the advertising ID.
 
-To remove support for the advertising id on iOS and any reference to the classes needed to obtain the advertising id, the following file can be deleted: */Assets/Plugin/iOS/IQUSDK.Instance.dvertisingStub.m*
+To remove support for the advertising id on iOS and any reference to the classes needed to obtain the advertising id, the following file can be deleted: */Assets/Plugin/iOS/IQUSDKAdvertisingStub.m*
 
 ## Informational properties
 
