@@ -10,7 +10,7 @@ namespace IQU.SDK
   /// </summary>
   public class IQUSDK
   {
-  #region Public consts
+    #region Public consts
   
     /// <summary>
     /// %SDK version.
@@ -22,7 +22,7 @@ namespace IQU.SDK
     /// </summary>
     public const string SdkType = "Unity";
 
-  #endregion
+    #endregion
 
     #region Private consts & types
 
@@ -1151,11 +1151,6 @@ namespace IQU.SDK
     /// </summary>
     private void ProcessPendingMessages()
     {
-      // exit if there are no pending messages
-      if (this.m_pendingMessages.IsEmpty())
-      {
-        return;
-      }
       // Move messages from pending messages to sending messages; this
       // will clear the pending message queue. The sending messages queue
       // is always empty before this call.
